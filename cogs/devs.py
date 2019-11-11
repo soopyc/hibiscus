@@ -58,6 +58,6 @@ class Devs(commands.Cog):
             await ctx.channel.send(embed=embed)
         except discord.errors.Forbidden:
             pass
-
+        
 def setup(bot):
     bot.add_cog(Devs(bot))
