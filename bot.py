@@ -42,6 +42,6 @@ async def on_ready():
     print(f'Logged in as {bot.user.name}\n\twith id: {bot.user.id}')
     print(f'Successfully logged in as {bot.user.name} and booted.')
 
-bot.run('NTc0OTQ3MTY5NjM1OTI2MDI3.XcgMuw.0Q8GmSLjxeHY2UayIO8xgv3S-7M', bot=True, reconnect=True)
+bot.run(':P', bot=True, reconnect=True)
 print("Alright, finished bot process and elapsed time is {} seconds".format(time.perf_counter()))
 exit(0)
