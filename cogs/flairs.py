@@ -17,6 +17,11 @@ except FileNotFoundError:
     error = 'notfound'
 except:
     error = 'unk'
+
+
+
+
+
 class Flairs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
