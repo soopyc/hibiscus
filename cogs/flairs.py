@@ -1,5 +1,12 @@
 from discord.ext import commands
 import discord
+error = ''
+try:
+    flairs = open('flairs.txt','r')
+except FileNotFoundError:
+    error = 'notfound'
+except:
+    error = 'unk'
 class Flairs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -37,4 +44,7 @@ class Flairs(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Flairs(bot))
+    if error == 'notfound':
+        raise FileNotFoundError("Flair config not found. Please use the template or the generator.")
+    else:
+        bot.add_cog(Flairs(bot))
