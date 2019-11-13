@@ -25,7 +25,7 @@ wait...
 
 Nevermind, it existed. More details of this repo in the projects page.
 
-## Flair config syntas!
+## Flair config syntax!
 Ok this is what a typical flair/role config at v0.0.1 looks like.
 ```json
 {
