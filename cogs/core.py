@@ -1,7 +1,7 @@
 import datetime
 from discord.ext import commands
 import discord
-from categories import category
+from .util.categories import category
 '''Core commands    
 '''
 

@@ -5,9 +5,11 @@ and I'm just a busy college student :P
 If you can help, feel free to submit a pr.
 
 '''
-from categories import category
-from discord.ext import commands
 import discord
+from discord.ext import commands
+
+from .util.categories import category
+
 error = ''
 flairs = ""
 try:
@@ -15,13 +17,13 @@ try:
     flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
+    raise FileNotFoundError("Flair config not found. Please use the template or the generator.")
 except:
     error = 'unk'
+##### Flairs Decode #####
+'''To See the syntax, visit the readme.md.'''
 
-
-
-
-
+##### Finish Decode #####
 class Flairs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

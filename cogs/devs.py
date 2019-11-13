@@ -1,12 +1,15 @@
-import subprocess
 import asyncio
 import inspect
 import shlex
+import subprocess
 import sys
-from categories import category
 
 import discord
 from discord.ext import commands
+
+from .util.categories import category
+
+
 '''Dev commands
 '''
 
