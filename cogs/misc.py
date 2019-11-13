@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+from categories import category
 '''Utility commands
 '''
 

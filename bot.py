@@ -24,10 +24,12 @@ bot = commands.Bot(command_prefix=get_prefix, description='Discord Bot with Cogs
 # List cogs to be run here
 cogs = [
     'cogs.flairs',
-    'cogs.utils',
-    'cogs.devs'
+    'cogs.misc',
+    'cogs.devs',
+    'cogs.core'
     ]
 print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
+# commands.Bot.remove_command('help')
 # Disable cogs
 # cogs = []
 # Loading cogs

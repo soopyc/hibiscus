@@ -5,7 +5,7 @@ and I'm just a busy college student :P
 If you can help, feel free to submit a pr.
 
 '''
-
+from categories import category
 from discord.ext import commands
 import discord
 error = ''
@@ -21,6 +21,7 @@ class Flairs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @category('Flairs')
     @commands.command(name='f')
     @commands.guild_only()
     async def f(self,ctx, *, ipt: str):
@@ -29,12 +30,14 @@ class Flairs(commands.Cog):
         '''
         await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to give the roles to you.')
 
+    @category("Flairs")
     @commands.command(name='flairs')
     @commands.guild_only()
     async def flairs(self,ctx):
         '''Check the available flairs available to add your yourself'''
         await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to tell you the available flairs, which is basically the same as in HTC.')
 
+    @category('Flairs')
     @commands.command(name='role',pass_context=True)
     async def role(self, ctx, *, role: discord.Role = None):
         """Give yourself a role, or remove it.

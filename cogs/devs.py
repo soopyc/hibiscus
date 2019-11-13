@@ -3,6 +3,7 @@ import asyncio
 import inspect
 import shlex
 import sys
+from categories import category
 
 import discord
 from discord.ext import commands
@@ -14,12 +15,17 @@ class Devs(commands.Cog):
     """Dev commands cog"""
     def __init__(self,bot):
         self.bot = bot
+
+    @category('Developers')
     @commands.command(name='shutdown', aliases=['die'])
     async def die(self,ctx):
+        '''Kills the bot.
+        '''
         await ctx.send('Shutting down...')
         await ctx.send(':wave:')
         await ctx.bot.logout()
 
+    @category('Developers')
     @commands.command(name='evaluate',aliases=['eval'])
     async def evaluate(self, ctx, *, code:str):
         '''Run some code.
@@ -39,7 +45,6 @@ class Devs(commands.Cog):
                 'author': ctx.author,
                 'bot': ctx.bot,
                 'message': ctx.message,
-                'channel': ctx.channel,
                 'ctx': ctx,
             }
             env.update(globals())
