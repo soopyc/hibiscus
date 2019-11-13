@@ -5,6 +5,8 @@ and I'm just a busy college student :P
 If you can help, feel free to submit a pr.
 
 '''
+import json
+
 import discord
 from discord.ext import commands
 
@@ -13,7 +15,7 @@ from .util.categories import category
 error = ''
 flairs = ""
 try:
-    flairsfile = open('flairs.json','r')
+    flairsfile = open('flairs.min.json','r')
     flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
@@ -42,7 +44,27 @@ class Flairs(commands.Cog):
     @commands.guild_only()
     async def flairs(self,ctx):
         '''Check the available flairs available to add your yourself'''
-        await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to tell you the available flairs, which is basically the same as in HTC.')
+        color = 0x00FFF8
+        embed = discord.Embed(
+            colour=color, 
+            title="__**Flairs**__", 
+            description='Flairs available to be assigned.'
+            )
+
+        with open('flairs.json','r') as temp:
+            cfg = json.load(temp)
+        for i in cfg:
+            if i == str(ctx.guild.id):
+                for k in cfg[i]:
+                    for e in cfg[i][k]:
+                        if e != "config":
+                            print('Name:{} Value:{}'.format(cfg[i][k][e]["name"],'{}{}'.format(ctx.prefix,e)))
+                            embed.add_field(name=cfg[i][k][e]["name"], value='{}{}'.format(ctx.prefix,e),inline=True)
+                      
+        try:
+            await ctx.channel.send(embed=embed)
+        except discord.errors.Forbidden:
+            pass
 
     @category('Flairs')
     @commands.command(name='role',pass_context=True)
