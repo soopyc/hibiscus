@@ -1,8 +1,18 @@
+'''
+Note from author:
+The flair bot would currently not support flair aliases, as it requires me to do a heck ton of stuff, binary searches
+and I'm just a busy college student :P
+If you can help, feel free to submit a pr.
+
+'''
+
 from discord.ext import commands
 import discord
 error = ''
+flairs = ""
 try:
-    flairs = open('flairs.txt','r')
+    flairsfile = open('flairs.json','r')
+    flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
 except:
