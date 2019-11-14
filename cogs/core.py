@@ -6,6 +6,9 @@ from discord.ext import commands
 
 from .util.categories import category
 
+import logging
+logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logger = logging.getLogger('cog.core')
 
 '''Core commands    
 '''
@@ -21,6 +24,7 @@ class Core(commands.Cog):
         '''Check the bot's uptime
         using ``time.perf_counter()``
         '''
+        logger.info('Running command uptime.')
         await ctx.send('Uptime: {} seconds'.format(time.perf_counter()))
 #    @category('info')
 #    @commands.command()

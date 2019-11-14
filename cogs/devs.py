@@ -1,5 +1,6 @@
 import asyncio
 import inspect
+import logging
 import shlex
 import subprocess
 import sys
@@ -9,6 +10,8 @@ from discord.ext import commands
 
 from .util.categories import category
 
+logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logger = logging.getLogger('cog.devs')
 
 '''Dev commands
 '''
@@ -24,6 +27,7 @@ class Devs(commands.Cog):
     async def die(self,ctx):
         '''Kills the bot.
         '''
+        logger.info('Running command die')
         await ctx.send('Shutting down...')
         await ctx.bot.logout()
 
@@ -39,6 +43,7 @@ class Devs(commands.Cog):
          `channel`
          `ctx`
         '''
+        logger.info('Running command eval with parameter(s) {}'.format(code))
         embed = None
         async with ctx.channel.typing():
             result = None
@@ -54,9 +59,11 @@ class Devs(commands.Cog):
                 result = eval(code, env)
                 if inspect.isawaitable(result):
                     result = await result
+                logger.info('eval success: {}'.format(result))
                 colour = 0x00FF00
             except Exception as e:
                 result = type(e).__name__ + ': ' + str(e)
+                logger.error('eval error: {}'.format(result))
                 colour = 0xFF0000
 
         embed = discord.Embed(colour=colour, title=code, description='```py\n{}```'.format(result))

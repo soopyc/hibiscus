@@ -1,6 +1,10 @@
 import discord
 from discord.ext import commands
 from .util.categories import category
+
+import logging
+logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logger = logging.getLogger('cog.misc')
 '''Utility commands
 '''
 

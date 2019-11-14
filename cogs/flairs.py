@@ -12,6 +12,9 @@ from discord.ext import commands
 
 from .util.categories import category
 
+import logging
+logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logger = logging.getLogger('cog.flairs')
 error = ''
 flairs = ""
 try:
@@ -19,6 +22,7 @@ try:
     flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
+    logger.critical('Failed to load flair config. If you don\'t want this cog, turn it off in bot.py. Support on turning commands off might be added.')
     raise FileNotFoundError("Flair config not found. Please use the template or the generator.")
 except:
     error = 'unk'
@@ -37,6 +41,7 @@ class Flairs(commands.Cog):
         '''Assign roles to yourself
         ipt = flair name (Check it using ?flairs)
         '''
+        logger.info('Running command f with parameter {}'.format(ipt))
         await ctx.message.delete()
         with open('flairs.json','r') as temp:
             cfg = json.load(temp)
@@ -62,6 +67,7 @@ class Flairs(commands.Cog):
     @commands.guild_only()
     async def flairs(self,ctx):
         '''Check the available flairs available to add your yourself'''
+        logger.info('Running command flairs')
         color = 0x00FFF8
         embed = discord.Embed(
             colour=color, 
@@ -90,6 +96,7 @@ class Flairs(commands.Cog):
     async def role(self, ctx, *, role: discord.Role = None):
         """Give yourself a role, or remove it.
         """
+        logger.info('Running command role with parameter {}'.format(role))
         user = ctx.message.author
 
         if role is None:

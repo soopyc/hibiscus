@@ -3,9 +3,13 @@ print('Importing discord                   ',end='\r')
 import discord
 print('Importing discord.ext.commands      ',end='\r')
 from discord.ext import commands
-print('Importing sys,traceback,time        ',end='\r')
-import sys, traceback, time
-print('Finished importing datas            ')
+print('Importing sys,traceback,time,logging',end='\r')
+import sys, traceback, time, logging
+print('Finished importing libraries        ')
+
+logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logger = logging.getLogger('bot')
+
 time.perf_counter()
 tfile = open('token.txt','r')
 token = tfile.read()
@@ -17,7 +21,6 @@ def get_prefix(bot, message):
     if not message.guild:
         return '?'
     return commands.when_mentioned_or(*prefixes)(bot, message)
-
 
 bot = commands.Bot(command_prefix=get_prefix, description='Discord Bot with Cogs')
 
@@ -35,20 +38,21 @@ print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 # Loading cogs
 if __name__ == '__main__':
     for cog in cogs:
-        print('Loading cog {}'.format(cog),end='\r')
+        logger.info('Loading cog {}'.format(cog))
         bot.load_extension(cog)
-        print('Done loading cog {}'.format(cog))
-        print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
+        logger.info('Done loading cog {}'.format(cog))
+        logger.info('Time elapsed: {} ms'.format(time.perf_counter()*1000))
         
-print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
-print('Loaded stuffs in {} ms'.format(time.perf_counter()*1000))
+logger.info('Time elapsed: {} ms'.format(time.perf_counter()*1000))
+logger.info('Loaded stuffs in {} ms'.format(time.perf_counter()*1000))
 
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user.name}\n\twith id: {bot.user.id}')
-    print(f'Successfully logged in as {bot.user.name} and booted.')
+    logger.info(f'Logged in as {bot.user.name}\n\twith id: {bot.user.id}')
+    logger.info(f'Successfully logged in as {bot.user.name} and booted.')
 
 bot.run(token, bot=True, reconnect=True)
-print("Alright, finished bot process and elapsed time is {} seconds".format(time.perf_counter()))
+ehd = logging.getLogger('exithandler')
+ehd.info("Alright, finished bot process and elapsed time is {} seconds".format(time.perf_counter()))
 exit(0)
