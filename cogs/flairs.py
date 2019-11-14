@@ -86,6 +86,7 @@ class Flairs(commands.Cog):
 
     @category('Flairs')
     @commands.command(name='role',pass_context=True)
+    @commands.has_role('Admin')
     async def role(self, ctx, *, role: discord.Role = None):
         """Give yourself a role, or remove it.
         """
