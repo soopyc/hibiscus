@@ -19,7 +19,7 @@ class Utils(commands.Cog):
         '''Make the bot say anything
         Make sure you comply with the rules.
         '''
-        logger.info(f'Running command with parameter {ipt}')
+        logger.info(f'Running say command with parameter {ipt}')
         await ctx.send(f'{ipt}')
 
     @commands.command(name='ping', aliases=['awake','check', 'pong'])
