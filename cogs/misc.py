@@ -19,11 +19,13 @@ class Utils(commands.Cog):
         '''Make the bot say anything
         Make sure you comply with the rules.
         '''
+        logger.info(f'Running command with parameter {ipt}')
         await ctx.send(f'{ipt}')
 
     @commands.command(name='ping', aliases=['awake','check', 'pong'])
     async def ping(self,ctx):
         '''Ping the bot and check the latency'''
+        logger.info(f'Running command ping with latency {self.bot.latency*1000}ms')
         await ctx.send(f'Pong, the bot latency is ``{self.bot.latency*1000}ms``')
 
 def setup(bot):
