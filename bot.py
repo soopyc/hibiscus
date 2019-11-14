@@ -43,10 +43,6 @@ if __name__ == '__main__':
 print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 print('Loaded stuffs in {} ms'.format(time.perf_counter()*1000))
 
-@commands.command
-async def when_mentioned(bot,ctx):
-    embed=discord.Embed(title="Hi, I'm Blossom!", description="My default prefix is `a!`. Hope this helps!", color=0x176cd5)
-    await ctx.send_message(ctx.message.channel, embed=embed)
 
 @bot.event
 async def on_ready():

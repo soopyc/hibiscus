@@ -1,7 +1,12 @@
 import datetime
-from discord.ext import commands
+import time
+
 import discord
+from discord.ext import commands
+
 from .util.categories import category
+
+
 '''Core commands    
 '''
 
@@ -11,6 +16,12 @@ class Core(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
+    @commands.command(name='uptime')
+    async def uptime(self,ctx):
+        '''Check the bot's uptime
+        using ``time.perf_counter()``
+        '''
+        await ctx.send('Uptime: {} seconds'.format(time.perf_counter()))
 #    @category('info')
 #    @commands.command()
 #    async def help(self, ctx, *args):
