@@ -25,7 +25,6 @@ class Devs(commands.Cog):
         '''Kills the bot.
         '''
         await ctx.send('Shutting down...')
-        await ctx.send(':wave:')
         await ctx.bot.logout()
 
     @category('Developers')
