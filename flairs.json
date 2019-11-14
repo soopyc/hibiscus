@@ -41,9 +41,13 @@
             "config":{
                 "mode": "multiple"
             },
-            "spoilers":{
-                "name": "Episode Spoilers",
-                "id": 617690826855809054
+            "bfdispoil":{
+                "name": "BFDI Episode Spoilers",
+                "id": 617523818667180055
+            },
+            "iispoil":{
+                "name": "II Episode Spoilers",
+                "id": 617545133575110662
             },
             "spoilerforever":{
                 "name": "Spoilers and don's ask me ever again",
