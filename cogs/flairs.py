@@ -37,7 +37,24 @@ class Flairs(commands.Cog):
         '''Assign roles to yourself
         ipt = flair name (Check it using ?flairs)
         '''
-        await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to give the roles to you.')
+        with open('flairs.json','r') as temp:
+            cfg = json.load(temp)
+        for i in cfg:
+            if i == str(ctx.guild.id):
+                for k in cfg[i]:
+                    for e in cfg[i][k]:
+                        if e != "config":
+                            print('Name:{} Value:{}'.format(cfg[i][k][e]["name"],'{}{}'.format(ctx.prefix,e)))
+                            if e == ipt:
+                                role = discord.utils.get(ctx.guild.roles, id=cfg[i][k][e]["id"])
+                                if role not in ctx.message.author.roles:
+                                    await ctx.message.author.add_roles(role)
+                                    await ctx.send("{} role has been removed from {}.".format(role, ctx.message.author.mention),delete_after=2)
+                                elif role in ctx.message.author.roles:
+                                    await ctx.message.author.remove_roles(role)
+                                    await ctx.send("{} role has been removed from {}.".format(role, ctx.message.author.mention),delete_after=2)
+        
+        # await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to give the roles to you.')
 
     @category("Flairs")
     @commands.command(name='flairs')
@@ -58,8 +75,8 @@ class Flairs(commands.Cog):
                 for k in cfg[i]:
                     for e in cfg[i][k]:
                         if e != "config":
-                            print('Name:{} Value:{}'.format(cfg[i][k][e]["name"],'{}{}'.format(ctx.prefix,e)))
-                            embed.add_field(name=cfg[i][k][e]["name"], value='{}{}'.format(ctx.prefix,e),inline=True)
+                            print('Name:{} Value:{}'.format(cfg[i][k][e]["name"],'{}f {}'.format(ctx.prefix,e)))
+                            embed.add_field(name=cfg[i][k][e]["name"], value='{}f {}'.format(ctx.prefix,e),inline=True)
                       
         try:
             await ctx.channel.send(embed=embed)
