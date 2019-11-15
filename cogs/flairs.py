@@ -18,7 +18,7 @@ logger = logging.getLogger('cog.flairs')
 error = ''
 flairs = ""
 try:
-    flairsfile = open('flairs.min.json','r')
+    flairsfile = open('flairs.json','r')
     flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
