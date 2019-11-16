@@ -43,7 +43,7 @@ class Moderation(commands.Cog):
 
     @commands.has_role('Admin')
     @commands.command(name='warn')
-    async def warn(self,ctx,stuff:str):
+    async def warn(self,ctx,*,stuff:str):
         '''Warn a user (see the usage before using.)
         What a massive rulebreaker you have to warn, eh?
         Usage: User Mention/ID|Offence Details|Brief Description
@@ -53,6 +53,7 @@ class Moderation(commands.Cog):
         '''
         await ctx.send('Please wait while the bot retrives data from the database...',delete_after=5)
         splited = stuff.split('|')
+        print(splited)
         user = splited[0]
         uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
         details = splited[1]
