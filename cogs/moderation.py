@@ -37,7 +37,8 @@ class Moderation(commands.Cog):
         for i in temp:
             temp1 = str(i[1]).replace('b','')
             temp1 = temp1.replace("'",'')
-            embed.add_field(name=f'Offence {i[2]}:',value=f'{temp1}',inline=True)
+            dt = str(i[4]).replace('b','').replace("'",'')
+            embed.add_field(name=f'Offence {i[2]}:',value=f'**Details**: {temp1}\n**Warned at:**{dt}',inline=True)
         await ctx.send(embed=embed)
 
     @commands.has_role('Admin')
@@ -55,8 +56,20 @@ class Moderation(commands.Cog):
         user = splited[0]
         uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
         details = splited[1]
+        brief = splited[2]
+        cur.execute(f'select * from offences where id="{uid}"')
+        result = cur.fetchall()
+        offencecount=len(result)+1
+        if brief = " ":
+            brief = "No brief given."
         dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","2","{dnt}","test")')
+        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","{offencecount}","{dnt}",{brief})')
+        cur.commit()
+        cur.execute(f'select * from offences where id="{uid}"')
+        currentoffences = cur.fetchall()
+        embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.'
+        embed.add_field(name='Reason',value=f'``{details}``')
+        embed.add_field(name='Warned by',value=f'{ctx.author}')
+        embed.add_field(name='Warned at',value=f'{dnt} UTC+8')
 def setup(bot):
     bot.add_cog(Moderation(bot))
-

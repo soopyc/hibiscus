@@ -1,5 +1,9 @@
 + indicates changes that adds content
 - indicates changes that removes content
+v0.1.7
++ Updated warnings command
++ Updated warn command
+
 v0.1.6.1
 + Added git pull command
 
