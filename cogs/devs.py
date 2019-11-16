@@ -72,6 +72,9 @@ class Devs(commands.Cog):
             await ctx.channel.send(embed=embed)
         except discord.errors.Forbidden:
             pass
-        
-def setup(bot):
+    @commands.command(name='gitpull')
+    async def gitpull(self,ctx):
+        log=subprocess.run('git pull',stdout=subprocess.PIPE)
+        await ctx.send(log)
+def setup(bot): 
     bot.add_cog(Devs(bot))
