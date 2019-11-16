@@ -74,7 +74,9 @@ class Devs(commands.Cog):
             pass
     @commands.command(name='gitpull')
     async def gitpull(self,ctx):
-        log=subprocess.run('git pull',stdout=subprocess.PIPE)
-        await ctx.send(log)
+        async with ctx.channel.typing():
+            log=subprocess.run('git pull',stdout=subprocess.PIPE)
+            out = str(log.stdout)
+            await ctx.send(f'```diff{out.replace('b','').replace("'",'').replace('\\n','\n')})
 def setup(bot): 
     bot.add_cog(Devs(bot))

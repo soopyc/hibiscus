@@ -5,6 +5,7 @@ import re
 from datetime import datetime
 import mysql.connector
 from discord.ext import commands
+from discord.ext.commands.errors import MissingPermissions
 
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.moderation')
@@ -41,8 +42,8 @@ class Moderation(commands.Cog):
             embed.add_field(name=f'Offence {i[2]}:',value=f'**Details**: {temp1}\n**Warned at:**{dt}',inline=True)
         await ctx.send(embed=embed)
 
-    @commands.has_role('Admin')
     @commands.command(name='warn')
+    @commands.has_permissions(manage_roles=True, manage_messages=True)
     async def warn(self,ctx,*,stuff:str):
         '''Warn a user (see the usage before using.)
         What a massive rulebreaker you have to warn, eh?
@@ -63,16 +64,48 @@ class Moderation(commands.Cog):
         offencecount=len(result)+1
         if brief == " ":
             brief = "No brief given."
-        dnt = datetime.now().strftime("%d/%m/%Y_%H:%M:%S")
-        print(f'ID={uid},details={details},Count={offencecount},{dnt},{brief}')
-        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}",{brief})')
+        dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        print(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}","{brief}")')
+        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}","{brief}")')
         db.commit()
         cur.execute(f'select * from offences where id="{uid}"')
-        currentoffences = cur.fetchall()
-        embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.')
+        currentoffences = len(cur.fetchall())
+        embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.',colour=0xFFCC00)
         embed.add_field(name='Reason',value=f'``{details}``')
         embed.add_field(name='Warned by',value=f'{ctx.author}')
         embed.add_field(name='Warned at',value=f'{dnt} UTC+8')
+        embed.add_field(name='Current warns',value=currentoffences)
         await ctx.send(embed=embed)
+    
+    @warn.error
+    async def warnerror(self,error,ctx):
+        if isinstance(error, commands.MissingPermissions):
+            embed = discord.Embed(title='Cannot warn a user',colour=0xFF0000,description='You do not have permission to do so.')
+            await ctx.send(embed=embed)
+    @commands.command(name="mute")
+    @commands.has_permissions(manage_roles=True, manage_messages=True)
+    async def clearwarn(self,ctx,user:str):
+        '''Removes all warnings from a user
+        '''
+        uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
+        command = f"DELETE FROM customers WHERE id = '{uid}'"
+        cur.execute(f'select * from offences where id="{uid}"')
+        temp = cur.fetchall()
+        warns = len(temp)
+        async with ctx.channel.typing():
+        cur.execcute(command)
+        db.commit()
+            await ctx.send(f'Removed {warns} warnings from user {user}.')
+    
+    @clearwarn.error
+    async def clearwarnerror(self,error,ctx):
+        if isinstance(error, commands.MissingPermissions):
+            embed = discord.Embed(title='Cannot clear warns',description='You do not have the permission to do so.',colour=0xFF0000)
+            await ctx.send(embed=embed)
 def setup(bot):
     bot.add_cog(Moderation(bot))
+
+'''
+A long long time ago that is an animal thing 
+
+'''
