@@ -1,0 +1,4 @@
+v0.1.5
++ Added changelog
++ Added ``Warnings`` command to check a user's warnings
++ Added moderation cog into bot.py because I forgot.

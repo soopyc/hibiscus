@@ -29,7 +29,8 @@ cogs = [
     'cogs.flairs',
     'cogs.misc',
     'cogs.devs',
-    'cogs.core'
+    'cogs.core',
+    'cogs.moderation'
     ]
 print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 # commands.Bot.remove_command('help')
