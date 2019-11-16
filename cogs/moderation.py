@@ -11,7 +11,7 @@ logger = logging.getLogger('cog.moderation')
 '''
 db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
 !!!! Warning: No Password Connection, MUST Restrict User.
-Manual Setup is required. THerefore, the bot will not be for total publicity.
+Manual Setup is required. Therefore, the bot will not be for total publicity.
 '''
 db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
 cur = db.cursor()
@@ -64,7 +64,7 @@ class Moderation(commands.Cog):
         if brief == " ":
             brief = "No brief given."
         dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","{offencecount}","{dnt}",{brief})')
+        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}",{brief})')
         db.commit()
         cur.execute(f'select * from offences where id="{uid}"')
         currentoffences = cur.fetchall()
