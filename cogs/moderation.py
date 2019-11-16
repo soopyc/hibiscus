@@ -64,7 +64,7 @@ class Moderation(commands.Cog):
             brief = "No brief given."
         dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","{offencecount}","{dnt}",{brief})')
-        cur.commit()
+        db.commit()
         cur.execute(f'select * from offences where id="{uid}"')
         currentoffences = cur.fetchall()
         embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.'
