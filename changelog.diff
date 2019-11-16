@@ -1,7 +1,10 @@
 + indicates changes that adds content
 - indicates changes that removes content
+v0.1.6
++ Changed ping command to embed and added database ping
++ Added the basic idea of the warn command.
 
 v0.1.5
 + Added changelog
 + Added ``Warnings`` command to check a user's warnings
-+ Added moderation cog into bot.py because I forgot.
++ Added moderation cog into bot.py because I forgot

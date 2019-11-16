@@ -1,6 +1,8 @@
 import logging
-
+import subprocess
 import discord
+import re
+from datetime import datetime
 import mysql.connector
 from discord.ext import commands
 
@@ -17,24 +19,14 @@ class Moderation(commands.Cog):
     '''Moderation Cog'''
     def __init__(self,bot):
         self.bot = bot
-    @commands.has_role('Admin')
-    @commands.command(name='warning')
-    async def warn(self,ctx,*,stuff: str):
-        '''Warn a user
-        What a rule-breaker, that you have to use this command...
-        '''
-        await ctx.send(f'The moderation cog is still being worked on. Ping a person with roles higher than you.')
-    
+
     @commands.command(name='warnings',aliases=['checkuser'])
     async def warnings(self,ctx,userid:str):
         '''Check the warnings for a user. 
         '''
         await ctx.send('Please wait, connecting to the database...',delete_after=5)
         # ping = userid
-        uid = userid.replace('<','')
-        uid = uid.replace('>','')
-        uid = uid.replace("@","")
-        uid = uid.replace('!','')
+        uid = userid.replace('<','').replace('>','').replace("@","").replace('!','')
         logger.info('Recieved database command `{}`'.format('select * from offences where id="{}"'.format(uid)))
         cur.execute('select * from offences where id="{}"'.format(str(uid)))
         temp = cur.fetchall()
@@ -48,13 +40,23 @@ class Moderation(commands.Cog):
             embed.add_field(name=f'Offence {i[2]}:',value=f'{temp1}',inline=True)
         await ctx.send(embed=embed)
 
+    @commands.has_role('Admin')
+    @commands.command(name='warn')
+    async def warn(self,ctx,stuff:str):
+        '''Warn a user (see the usage before using.)
+        What a massive rulebreaker you have to warn, eh?
+        Usage: User Mention/ID|Offence Details|Brief Description
+        No spaces between the pipes(|)
+        If you want to use the default value, leave a space between the pipes.
+        If you don't see any messages, check your input or ask @Kenny_#2763
+        '''
+        await ctx.send('Please wait while the bot retrives data from the database...',delete_after=5)
+        splited = stuff.split('|')
+        user = splited[0]
+        uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
+        details = splited[1]
+        dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","2","{dnt}","test")')
 def setup(bot):
     bot.add_cog(Moderation(bot))
-'''
-cur.execute('select * from offences where id="{}"'.format(str(477792814202224641)))
-temp = cur.fetchall()
-for i in temp:
-    temp1 = str(i[1]).replace('b','')
-    temp1 = temp1.replace("'",'')
-    embed.add_field(name=f'Offence {i[2]}:',value=f'{temp1}',inline=True)
-'''
+
