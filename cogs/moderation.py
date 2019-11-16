@@ -63,7 +63,7 @@ class Moderation(commands.Cog):
         offencecount=len(result)+1
         if brief == " ":
             brief = "No brief given."
-        dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        dnt = datetime.now().strftime("%d/%m/%Y_%H:%M:%S")
         print(f'ID={uid},details={details},Count={offencecount},{dnt},{brief}')
         cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}",{brief})')
         db.commit()
