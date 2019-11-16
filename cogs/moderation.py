@@ -64,6 +64,7 @@ class Moderation(commands.Cog):
         if brief == " ":
             brief = "No brief given."
         dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        print(f'ID={uid},details={details},Count={count},{dnt},{brief}')
         cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}",{brief})')
         db.commit()
         cur.execute(f'select * from offences where id="{uid}"')
