@@ -67,9 +67,10 @@ class Moderation(commands.Cog):
         db.commit()
         cur.execute(f'select * from offences where id="{uid}"')
         currentoffences = cur.fetchall()
-        embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.'
+        embed = discord.Embed(title=f'Warned user {user}',description=f'User {user} warned.')
         embed.add_field(name='Reason',value=f'``{details}``')
         embed.add_field(name='Warned by',value=f'{ctx.author}')
         embed.add_field(name='Warned at',value=f'{dnt} UTC+8')
+        await ctx.send(embed=embed)
 def setup(bot):
     bot.add_cog(Moderation(bot))
