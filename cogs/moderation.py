@@ -60,7 +60,7 @@ class Moderation(commands.Cog):
         cur.execute(f'select * from offences where id="{uid}"')
         result = cur.fetchall()
         offencecount=len(result)+1
-        if brief = " ":
+        if brief == " ":
             brief = "No brief given."
         dnt = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}","{offencecount}","{dnt}",{brief})')
