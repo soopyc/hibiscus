@@ -1,5 +1,7 @@
 + indicates changes that adds content
 - indicates changes that removes content
+! indicates work-in-progress changes
+
 v0.1.9 
 + gitpull bugfix
 + Kick command (Heavy wip)
