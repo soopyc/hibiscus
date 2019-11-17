@@ -1,11 +1,16 @@
 ! NEWS !
 ! pyinstaller builds will be available eventually. Just, stay patient.
-(tbh no one cares about this project, lol)
+! (tbh no one cares about this project, lol)
 
 + indicates changes that adds content
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
+
+v0.2.0.1
+- spammy commands
++ cleaned up changelog.diff
++ hella (major :sweat_smile:) bugfixes
 
 v0.2.0
 + Updated changelog.diff
@@ -32,19 +37,19 @@ v0.1.7
 + Updated Moderation.warn command
 
 v0.1.6.1
-+ Added Devs.gitpull command
++ Devs.gitpull command
 
 v0.1.6
 + Changed Misc.ping command to embed and added database ping
-+ Added the basic idea of the Moderation.warn command.
++ Moderation.warn
 
 v0.1.5
-+ Added changelog.diff
-+ Added Moderation.warnings command to check a user's warnings
-+ Added moderation cog into bot.py because I forgot
++ changelog.diff
++ Moderation.warnings command to check a user's warnings
++ moderation cog into bot.py because I forgot
 
 v0.1.4
 + Moderation offences stored in MySQL server database
 + Readme-selfhosting section
-- Flairs cog removed open flairs.min.json
+- cogs.flairs removed open flairs.min.json
 - flairs.min.json

@@ -109,13 +109,16 @@ class Moderation(commands.Cog):
 
     @commands.command(name='kick')
     @commands.has_permissions(kick_members=True)
-    async def kick(self,ctx,user:str,reason:str):
+    async def kick(self,ctx,user:discord.User,reason:str):
         '''Kick a user from the server
         WHO DOES THAT??????
         '''
         async with ctx.channel.typing():
-            ctx.guild.kick(user=user)
-            embed = discord.Embed(title='User kicked.',description=f'User {user.name} kicked')
+            try:
+                await ctx.guild.kick(user=user,reason=reason)
+            except Exception as error:
+                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+            embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked')
             embed.add_field(name='Reason:',value=reason)
         await ctx.send('_ _',embed=embed)
     @kick.error
@@ -124,14 +127,18 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
     @commands.command(name='ban',aliases=['umbrella','banhammer'])
     @commands.has_permissions(ban_members=True)
-    async def ban(self,ctx,user:str,reason:str,deletemsg:int=1):
+    async def ban(self,ctx,user:discord.User,reason:str,deletemsg:int=1):
         '''Ban a user
         WHAT THE HECK BAD BAN BAN BAN BDNANDABDAJDBudnb
         deletemsg: The number of days worth of messages to delete from the user in the guild. The minimum is 0 and the maximum is 7.
         '''
         async with ctx.channel.typing():
-            ctx.guild.ban(user)
-            embed = discord.Embed(title='')
+            try:
+                await ctx.guild.ban(user,reason=reason)
+            except Exception as error:
+                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+            embed = discord.Embed(title='User banned.',description=f'User {user.mention} banned.',colour=0xFF0000)
+            embed.add_field(name='Reason',value=reason)
         await ctx.send(embed=embed)
     @ban.error
     async def banerror(self,error,ctx):

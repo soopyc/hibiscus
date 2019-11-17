@@ -33,7 +33,6 @@ cogs = [
     'cogs.moderation',
     'cogs.fun'
     ]
-print('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 # commands.Bot.remove_command('help')
 # Disable cogs
 # cogs = []
