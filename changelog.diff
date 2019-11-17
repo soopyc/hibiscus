@@ -19,3 +19,9 @@ v0.1.5
 + Added changelog
 + Added ``Warnings`` command to check a user's warnings
 + Added moderation cog into bot.py because I forgot
+
+v0.1.4
++ Moderation offences stored in MySQL server database
++ Readme-selfhosting section
+- Flairs cog removed open flairs.min.json
+- flairs.min.json
