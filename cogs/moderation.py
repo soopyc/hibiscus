@@ -88,13 +88,13 @@ class Moderation(commands.Cog):
         '''Removes all warnings from a user
         '''
         uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
-        command = f"DELETE FROM customers WHERE id = '{uid}'"
+        command = f"delete from offences where id = '{uid}'"
         cur.execute(f'select * from offences where id="{uid}"')
         temp = cur.fetchall()
         warns = len(temp)
         async with ctx.channel.typing():
-        cur.execcute(command)
-        db.commit()
+            cur.execcute(command)
+            db.commit()
             await ctx.send(f'Removed {warns} warnings from user {user}.')
     
     @clearwarn.error
