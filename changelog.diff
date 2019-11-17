@@ -1,5 +1,12 @@
 + indicates changes that adds content
 - indicates changes that removes content
+v0.1.9 
++ gitpull bugfix
++ Kick command (Heavy wip)
++ Changed clearwarn to embed style output
++ Finished RemoveWarning command
+! Heavy WIPs: Kick command, ban command, Warn command
+
 v0.1.8
 + Updated gitpull command
 + Updated remove warning command(wip seriously)

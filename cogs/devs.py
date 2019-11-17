@@ -77,6 +77,6 @@ class Devs(commands.Cog):
         async with ctx.channel.typing():
             log=subprocess.run('git pull',stdout=subprocess.PIPE)
             out = str(log.stdout)
-            await ctx.send(f'```diff{out.replace('b','').replace("'",'').replace('\\n','\n')})
+            await ctx.send("```diff\n{}```".format(out.replace('b','').replace('\\n','\n')).replace('\'',''))
 def setup(bot): 
     bot.add_cog(Devs(bot))
