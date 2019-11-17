@@ -1,32 +1,46 @@
+! NEWS !
+! pyinstaller builds will be available eventually. Just, stay patient.
+(tbh no one cares about this project, lol)
+
 + indicates changes that adds content
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
+
+v0.2.0
++ Updated changelog.diff
+- massive update to Moderation.warn command
+- Removed Moderation.warn param times as it softlocks the system.
++ fun cog
++ Fun.bran command(fake ban)
++ Moderation.kick command
++ Moderation.ban command
+
 v0.1.9 
-+ gitpull bugfix
-+ Kick command (Heavy wip)
-+ Changed clearwarn to embed style output
-+ Finished RemoveWarning command
-! Heavy WIPs: Kick command, ban command, Warn command
++ Devs.gitpull bugfix
++ Moderstion.kick command (Heavy wip)
++ Changed Moderation.clearwarn to embed style output
++ Finished Moderation.clearwarn command
+! Heavy WIPs: Moderation.kick command, Moderation.ban command, Moderation.warn command
 
 v0.1.8
-+ Updated gitpull command
-+ Updated remove warning command(wip seriously)
++ Updated Devs.gitpull command
++ Updated Moderation.clearwarn command(wip seriously)
 
 v0.1.7
-+ Updated warnings command
-+ Updated warn command
++ Updated Moderation.warnings command
++ Updated Moderation.warn command
 
 v0.1.6.1
-+ Added git pull command
++ Added Devs.gitpull command
 
 v0.1.6
-+ Changed ping command to embed and added database ping
-+ Added the basic idea of the warn command.
++ Changed Misc.ping command to embed and added database ping
++ Added the basic idea of the Moderation.warn command.
 
 v0.1.5
-+ Added changelog
-+ Added ``Warnings`` command to check a user's warnings
++ Added changelog.diff
++ Added Moderation.warnings command to check a user's warnings
 + Added moderation cog into bot.py because I forgot
 
 v0.1.4
