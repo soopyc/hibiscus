@@ -1,18 +1,24 @@
-! NEWS !
+NEWS | 2
 ! pyinstaller builds will be available eventually. Just, stay patient.
-! (tbh no one cares about this project, lol)
+! changelog might be uglified to suit the changelog command.
 
+LEGENDS | 3
 + indicates changes that adds content
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
+v0.2.1 | 3
++ try except cases, more user feedback
++ bugfixes
+! changelog command
 
-v0.2.0.1
+v0.2.0.1 | 4
+[M]
 - spammy commands
 + cleaned up changelog.diff
 + hella (major :sweat_smile:) bugfixes
 
-v0.2.0
+v0.2.0 | 7
 + Updated changelog.diff
 - massive update to Moderation.warn command
 - Removed Moderation.warn param times as it softlocks the system.
@@ -21,34 +27,35 @@ v0.2.0
 + Moderation.kick command
 + Moderation.ban command
 
-v0.1.9 
+v0.1.9 / 5
 + Devs.gitpull bugfix
 + Moderstion.kick command (Heavy wip)
 + Changed Moderation.clearwarn to embed style output
 + Finished Moderation.clearwarn command
 ! Heavy WIPs: Moderation.kick command, Moderation.ban command, Moderation.warn command
 
-v0.1.8
+v0.1.8 | 2
 + Updated Devs.gitpull command
 + Updated Moderation.clearwarn command(wip seriously)
 
-v0.1.7
+v0.1.7 | 2
 + Updated Moderation.warnings command
 + Updated Moderation.warn command
 
-v0.1.6.1
+v0.1.6.1 | 2
+[M]
 + Devs.gitpull command
 
-v0.1.6
+v0.1.6 | 2
 + Changed Misc.ping command to embed and added database ping
 + Moderation.warn
 
-v0.1.5
+v0.1.5 | 3
 + changelog.diff
 + Moderation.warnings command to check a user's warnings
 + moderation cog into bot.py because I forgot
 
-v0.1.4
+v0.1.4 | 4
 + Moderation offences stored in MySQL server database
 + Readme-selfhosting section
 - cogs.flairs removed open flairs.min.json
