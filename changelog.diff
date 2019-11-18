@@ -7,6 +7,11 @@ LEGENDS | 3
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
+v0.2.2 | 2
++ changelog command(out of wip)
+! mute command
+! 
+
 v0.2.1 | 3
 + try except cases, more user feedback
 + bugfixes
@@ -27,7 +32,7 @@ v0.2.0 | 7
 + Moderation.kick command
 + Moderation.ban command
 
-v0.1.9 / 5
+v0.1.9 | 5
 + Devs.gitpull bugfix
 + Moderstion.kick command (Heavy wip)
 + Changed Moderation.clearwarn to embed style output

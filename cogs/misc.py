@@ -33,16 +33,83 @@ class Utils(commands.Cog):
     
     @commands.command(name='changelog',aliases=['chglog','changes'])
     async def changelog(self,ctx,version:str=None):
-        '''See the change log of the bot.
+        '''```See the change log of the bot.
         version is the v*.*.*
         Version marked with [M] are minor updates.
-        tbh you can try other sections, it might still work.
+        use ``changelog latest`` if you want to see the latest update.
+        to see the available sections, use `changelog sections`
+        tbh you can try other sections, it might still work.```
         '''
-        if version == None:
+        async with ctx.channel.typing():
             chglogf = open('changelog.diff','r')
             chglog = chglogf.read()
-            return await ctx.send(embed=discord.Embed(title='Changelog',description='```diff\n{}```'.format(chglog)))
-        else:
-            return await ctx.send('Work in progress.')
+            if version == None:
+                return await ctx.send(embed=discord.Embed(title='Changelog',description='```diff\n{}```'.format(chglog)))
+            elif version == 'sections':
+                temp = re.compile(r'v*.*.* \| [0-9]').findall(chglog)
+                sections = ''
+                for i in temp:
+                    sections += i.split('|')[0].replace(' ','')
+                    sections += ', '
+                return await ctx.send(embed=discord.Embed(title='Changelog Sections',description='`\n{}``'.format(sections)))
+            elif version == 'latest':
+                chgarr = chglog.splitlines()
+                temp = re.compile(r'v*.*.* \| [0-9]').findall(chglog)
+                ltst = temp[2].split('|')[0].replace(' ','')
+                log = ''
+                currln = 0
+                lns = []
+                for i in range(1,len(chgarr)+1):
+                    print(i)
+                    if chgarr[i-1].split('|')[0] == '{} '.format(ltst):
+                        count = int(chgarr[i-1].split('|')[1])
+                        print('Count: {}'.format(count))           
+                        temp = 0
+                        while temp <= count:
+                            lns.append(currln+temp)
+                            temp += 1
+                    currln += 1
+                for i in lns:
+                    log += chgarr[i]
+                    log += '\n'
+                return await ctx.send(embed=discord.Embed(title='Changelog of version {}'.format(version),description='```diff\n{}```'.format(log)))
+            else:
+                chgarr = chglog.splitlines()
+                log = ''
+                currln = 0
+                lns = []
+                for i in range(1,len(chgarr)+1):
+                    print(i)
+                    if chgarr[i-1].split('|')[0] == '{} '.format(version):
+                        count = int(chgarr[i-1].split('|')[1])
+                        print('Count: {}'.format(count))           
+                        temp = 0
+                        while temp <= count:
+                            lns.append(currln+temp)
+                            temp += 1
+                    currln += 1
+                for i in lns:
+                    log += chgarr[i]
+                    log += '\n'
+                return await ctx.send(embed=discord.Embed(title='Changelog of version {}'.format(version),description='```diff\n{}```'.format(log)))
 def setup(bot):
     bot.add_cog(Utils(bot))
+'''
+currln = 0
+lns = []
+count = 0
+for i in range(1,len(chgarr)+1):
+    print(i)
+    if chgarr[i-1].split('|')[0] == 'v0.2.1 ':
+        count = int(chgarr[i-1].split('|')[1])
+        print('Count: {}'.format(count))           
+        temp = 0
+        while temp <= count:
+            print(lns)
+            lns.append(currln+temp)
+            temp += 1
+    currln += 1
+for i in lns:
+    logs += chgarr[i]
+    logs += '\n'
+'''
