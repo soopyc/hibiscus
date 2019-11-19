@@ -25,9 +25,14 @@ class Moderation(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
-    @commands.command(name='warnings',aliases=['checkuser','warns'])
+    @commands.command(name='offences',aliases=['checkuser','warns'])
     async def warnings(self,ctx,userid:discord.User):
-        '''Check the warnings for a user. 
+        '''Check the offences of a user. 
+        Including: 
+        - global ban issued by the bot
+        - global warns issued by the bot
+        - global kicks issued by the bot
+        - global mutes issued by the bot
         '''
         await ctx.send('Please wait, connecting to the database...',delete_after=5)
         # ping = userid
@@ -47,9 +52,9 @@ class Moderation(commands.Cog):
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             if len(temp) == 0:
-                embed = discord.Embed(title=f'Warnings for user {userid.name}',description=f'There are no warning(s) for the user {userid.name}.')
+                embed = discord.Embed(title=f'Offences of user {userid.name}',description=f'There are no offence(s) recorded for the user {userid.name}.')
             else:
-                embed = discord.Embed(title=f'Warning(s) for user {userid.name}',description=f'There are {len(temp)} warning(s) for the user {userid.name}.')
+                embed = discord.Embed(title=f'Offences(s) of user {userid.name}',description=f'There are {len(temp)} offence(s) recorded for the user {userid.name}.')
             for i in temp:
                 temp1 = str(i[1]).replace("'",'')
                 temp2 = [c for c in temp1]
@@ -66,7 +71,14 @@ class Moderation(commands.Cog):
                     if count != 0:
                         dt += k
                     count += 1
-                embed.add_field(name=f'Offence {i[2]}:',value=f'**Details**: {temp1}\n**Warned at:**{dt}',inline=True)
+                punitemp = [t3 for t3 in str(i[5]).replace("'",'')]
+                punish = ''
+                count = 0
+                for k in punitemp:
+                    if count != 0:
+                        punish += k
+                    count += 1
+                embed.add_field(name=f'Offence {i[2]}:',value=f'**Details**: {temp1}\n**Warned at:**{dt}\n**Punishment:**{punish}',inline=True)
         await ctx.send(embed=embed)
 
     @commands.command(name='warn')
@@ -93,7 +105,7 @@ class Moderation(commands.Cog):
 #            logger.info(f'Warning user {uid} for {i+1} times')
             dblog.info(f'Executing cur.execute(f"select * from offences where id="{uid}")')
             try:
-                cur.execute(f'select * from offences where id="{uid}"')
+                cur.execute(f'select * from offences where (id,punishment)=("{uid}","Warning")')
                 dblog.info('Executing cur.fetchall')
                 result = cur.fetchall()
             except Exception as error:
@@ -102,7 +114,7 @@ class Moderation(commands.Cog):
             if brief == " ":
                 brief = "No brief given."
             try:
-                cur.execute(f'insert into offences (id,details,count,date,brief) values ("{uid}","{details}",{offencecount},"{dnt}","{brief}")')
+                cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{details}",{offencecount},"{dnt}","{brief}","Warning","{ctx.guild.id}")')
                 db.commit()
                 cur.execute(f'select * from offences where id="{uid}"')
                 currentoffences = len(cur.fetchall())
@@ -112,7 +124,7 @@ class Moderation(commands.Cog):
             embed.add_field(name='Reason',value=f'``{details}``')
             embed.add_field(name='Warned by',value=f'{ctx.author.mention}')
             embed.add_field(name='Warned at',value=f'{dnt} UTC+8')
-            embed.add_field(name='Current warns',value=currentoffences)
+            embed.add_field(name='Current warnings',value=currentoffences)
         await ctx.send(embed=embed)
 
     @warn.error
@@ -131,9 +143,9 @@ class Moderation(commands.Cog):
             return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
         cur = db.cursor()
         uid = user.replace('<','').replace('>','').replace("@","").replace('!','')
-        command = f"delete from offences where id = '{uid}'"
+        command = f"delete from cogbot_schema.offences where (id,punsishment) = ({uid},\"warning\")"
         try:
-            cur.execute(f'select * from offences where id="{uid}"')
+            cur.execute(f'select * from offences where (id,punsishment) = ({uid},\"warning\")')
             temp = cur.fetchall()
         except Exception as error:
             return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
@@ -155,6 +167,9 @@ class Moderation(commands.Cog):
         '''Kick a user from the server
         WHO DOES THAT??????
         '''
+        await ctx.send('Connecting to database...',delete_after=3)
+        dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        uid = user.id
         async with ctx.channel.typing():
             try:
                 db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
@@ -165,7 +180,14 @@ class Moderation(commands.Cog):
                 await ctx.guild.kick(user=user,reason=reason)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
-            embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked')
+            try:
+                cur.execute(f'select * from offences where id="{uid}"')
+                count = len(cur.fetchall())+1
+                cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{reason}",{count},"{dnt}","User Kicked.",\"kick\","{ctx.guild.id}")')
+                db.commit()
+            except Exception as error:
+                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+            embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked',colour=0xFFFF00)
             embed.add_field(name='Reason:',value=reason)
         await ctx.send('_ _',embed=embed)
     @kick.error
@@ -179,6 +201,9 @@ class Moderation(commands.Cog):
         WHAT THE HECK??!?!?!???!!?! BAD BAN BAN BAN BDNANDABDAJDBudnb
         deletemsg: The number of days worth of messages to delete from the user in the guild. The minimum is 0 and the maximum is 7.
         '''
+        uid = user.id
+        dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        await ctx.send('Connecting to database...',delete_after=3)
         async with ctx.channel.typing():
             try:
                 db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
@@ -187,6 +212,13 @@ class Moderation(commands.Cog):
             cur = db.cursor()
             try:
                 await ctx.guild.ban(user,reason=reason)
+            except Exception as error:
+                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+            try:
+                cur.execute(f'select * from offences where id="{uid}"')
+                count = len(cur.fetchall())+1
+                cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{reason}",{count},"{dnt}","User Banned.","ban","{ctx.guild.id}")')
+                db.commit()
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             embed = discord.Embed(title='User banned.',description=f'User {user.mention} banned.',colour=0xFF0000)

@@ -7,6 +7,12 @@ LEGENDS | 3
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
+v0.2.3 | 4
++ warn(db.offences.warn)
++ ban(db.offences.ban)
++ kick(db.offences.kick)
++ Functional moderation cog
+
 v0.2.2 | 2
 + changelog command(out of wip)
 ! mute command
