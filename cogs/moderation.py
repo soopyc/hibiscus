@@ -29,10 +29,10 @@ class Moderation(commands.Cog):
     async def warnings(self,ctx,userid:discord.User):
         '''Check the offences of a user. 
         Including: 
-        - global ban issued by the bot
-        - global warns issued by the bot
-        - global kicks issued by the bot
-        - global mutes issued by the bot
+        - ban issued by the bot (global)
+        - warns issued by the bot (global)
+        - kicks issued by the bot (global)
+        - mutes issued by the bot (global)
         '''
         await ctx.send('Please wait, connecting to the database...',delete_after=5)
         # ping = userid
