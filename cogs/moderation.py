@@ -229,6 +229,9 @@ class Moderation(commands.Cog):
     @commands.command(name='mute')
     @commands.has_permissions(manage_roles=True)
     async def mute(self,ctx,user:discord.User):
+        '''Mute a user
+        Unmute on your own.
+        '''
         uid = user.id
         dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         await ctx.send('Connecting to database...',delete_after=3)
