@@ -99,10 +99,7 @@ class Moderation(commands.Cog):
             cur = db.cursor()
             uid = user.id
             dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-            logger.info('Warning {}')# for {} time(s)'.format(uid,times))
-#            print(f'"{uid}","{details}","{dnt}","{brief}",{int(times)} times')
-#            for i in range(0,times):
-#            logger.info(f'Warning user {uid} for {i+1} times')
+            logger.info('Warning {}'.format(user.name))
             dblog.info(f'Executing cur.execute(f"select * from offences where id="{uid}")')
             try:
                 cur.execute(f'select * from offences where (id,punishment)=("{uid}","Warning")')
@@ -228,5 +225,20 @@ class Moderation(commands.Cog):
     async def banerror(self,error,ctx):
         embed = discord.Embed(title='Banning failed',description='Exception:\n```{}```'.format(error),colour=0xFF0000)
         await ctx.send(embed=embed)
+
+    @commands.command(name='mute')
+    @commands.has_permissions(manage_roles=True)
+    async def mute(self,ctx,user:discord.User):
+        uid = user.id
+        dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        await ctx.send('Connecting to database...',delete_after=3)
+        async with ctx.channel.typing():
+            try:
+                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+            except Exception as error:
+                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+            cur = db.cursor()
+
+
 def setup(bot):
     bot.add_cog(Moderation(bot))

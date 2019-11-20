@@ -19,30 +19,26 @@ class Fun(commands.Cog):
 
     @commands.command(name='pyramid')
     async def pyramid(self,ctx,height:int):
-        '''Make a pyramid.
+        '''Make a pyramid with size.
         '''
-        count = 1
-        string = ''
-        temp = []
-        for i in range(0,height):
-            for k in range(0,count):
-                string += '*'
-            count += 2
-            temp.append(string)
-            string = ''
-        baselen = len([a for a in temp[len(temp)-1]])
-        spaces = int(baselen / 2)
-        for i in range(0,height):
-            temp3 = ''
-            for k in range(0,spaces):
-                temp3 += ' '
-            temp[i] = temp3 + temp[i]
-            spaces -= 1
-        string = ''
-        for i in temp:
-            string += i
-            string += '\n'
-        await ctx.send(embed=discord.Embed(title='Pyramid Size={}'.format(height),description='```{}```'.format(string),colour=0x00FF00))
+        stars= "*"
+        for space_count in range(height- 1, -1, -1):
+            print(" " * space_count + stars+ " " * space_count)
+            stars+= "**"
+        await ctx.send(embed=discord.Embed(title='Pyramid Size={}'.format(height),description='```{}```'.format(stars),colour=0x00FF00))
 
 def setup(bot):
     bot.add_cog(Fun(bot))
+
+'''
+def rhombus(height:int):
+    for space_count in range(int((height-1)/2), -1, -1):
+        spaces = ''
+        tempspaces = ''
+        for a in range(1,int((height-1)/2)+1):
+            tempspaces += ' '
+        for i in range(1,space_count+1):
+            spaces += ' '
+        print("{0}*{0}* (space count: {1})".format(spaces,space_count,tempspaces))
+    return
+'''
