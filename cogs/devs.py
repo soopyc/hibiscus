@@ -8,6 +8,8 @@ import sys
 import discord
 from discord.ext import commands
 
+from colorhelper import c
+
 from .util.categories import category
 
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
@@ -63,7 +65,7 @@ class Devs(commands.Cog):
                 colour = 0x00FF00
             except Exception as e:
                 result = type(e).__name__ + ': ' + str(e)
-                logger.error('eval error: {}'.format(result))
+                logger.error('{}eval error: {}'.format(c.warning,result))
                 colour = 0xFF0000
 
         embed = discord.Embed(colour=colour, title=code, description='```py\n{}```'.format(result))
@@ -78,5 +80,7 @@ class Devs(commands.Cog):
             log=subprocess.run('git pull',stdout=subprocess.PIPE)
             out = str(log.stdout)
             await ctx.send("```diff\n{}```".format(out.replace('b','').replace('\\n','\n')).replace('\'',''))
+    @commands.command(name='gitpush')
+
 def setup(bot): 
     bot.add_cog(Devs(bot))

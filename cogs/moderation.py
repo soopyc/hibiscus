@@ -7,7 +7,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import MissingPermissions
-
+from colorhelper import c
 import mysql.connector
 from mysql.connector.errors import OperationalError
 

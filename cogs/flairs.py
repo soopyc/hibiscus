@@ -9,7 +9,7 @@ import json
 
 import discord
 from discord.ext import commands
-
+from colorhelper import c
 from .util.categories import category
 
 import logging
@@ -22,7 +22,7 @@ try:
     flairs = flairsfile.read()
 except FileNotFoundError:
     error = 'notfound'
-    logger.critical('Failed to load flair config. If you don\'t want this cog, turn it off in bot.py. Support on turning commands off might be added.')
+    logger.critical('{}Failed to load flair config. If you don\'t want this cog, turn it off in bot.py. Support on turning commands off might be added.'.format(c.danger))
     raise FileNotFoundError("Flair config not found. Please use the template or the generator.")
 except:
     error = 'unk'

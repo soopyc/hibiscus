@@ -11,6 +11,9 @@ WORK IN PROGRESS | 2
 ! mute command
 ! unmute command
 
+v0.2.7 | 2
+[M]
++ colored log messages
 v0.2.6 | 4
 [WIP]
 + pyramid command is now much smaller in size

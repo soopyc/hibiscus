@@ -5,9 +5,10 @@ print('Importing discord.ext.commands      ',end='\r')
 from discord.ext import commands
 print('Importing sys,traceback,time,logging',end='\r')
 import sys, traceback, time, logging
-print('Finished importing libraries        ')
+from colorhelper import c
+print('Finished importing libraries                         ')
 
-logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
+logging.basicConfig(level=logging.INFO, format='{}[%(name)s %(levelname)s] %(message)s'.format(c.info))
 logger = logging.getLogger('bot')
 
 time.perf_counter()
