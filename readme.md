@@ -25,10 +25,14 @@ wait...
 
 Nevermind, it existed. More details of this repo in the projects page.
 
+# Feature Request
+Add a new issue, use the feature request template and ping(mention) me(@kcomain) or other collaborators.
+
 # Selfhosting
 You MAY selfhost this bot if you want.
 #### How to selfhost
-First, download python 3.6+ [here](https://www.python.org/downloads/) if you haven't. I suggest python 3.6.0 as its the language this bot is being developed in. Therefore, the chances of succeding the setup would be higher. (Also I have no \*\*\*\*\*\*\* idea how you live if you use python2.)
+First, download python 3.6+ [here](https://www.python.org/downloads/) if you haven't. I suggest python 3.6.0 as its the language this bot is being developed in. Therefore, the chances of succeding the setup would be higher. (Also I have no \*\*\*\*\*\*\* idea how you live if you use python 2.)
+*P.S. It would also work in python 3.8.0*
 
 ###### #####To be done.#####
 ## Flair config syntax!
