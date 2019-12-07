@@ -11,10 +11,15 @@ WORK IN PROGRESS | 2
 ! mute command
 ! unmute command
 
+v0.2.8 | 3
++ changed db to heroku
+! mod db
++ requirements.txt
+
 v0.2.7 | 3
 [M]
 + colored log messages
-+ Added some stuff
++ some stuff
 
 v0.2.6 | 4
 [WIP]

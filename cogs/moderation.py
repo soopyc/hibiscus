@@ -14,7 +14,15 @@ from mysql.connector.errors import OperationalError
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.moderation')
 dblog = logging.getLogger('database')
+dbhost = "uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"
+dbuser = "rbo2k37ji007clou"
+dbpass = "jffa0eis7dtt4yvm"
+dbdb = "pycrhbfzhwacvvo9"
+dbport = "3306"
+
 '''
+!!! OUTDATED !!!
+
 db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
 !!!! Warning: No Password Connection, MUST Restrict User.
 Manual Setup is required. Therefore, the bot will not be for total publicity.
@@ -38,7 +46,7 @@ class Moderation(commands.Cog):
         # ping = userid
         async with ctx.channel.typing():
             try:
-                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+                db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
