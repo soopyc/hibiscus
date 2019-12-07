@@ -4,7 +4,6 @@ import time
 import discord
 from discord.ext import commands
 
-from .util.categories import category
 
 import logging
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
@@ -33,7 +32,7 @@ class Core(commands.Cog):
 #        cmds = {i for i in ctx.bot.all_commands.values()}
 #        if len(args) == 0:
 #            d = ''#'**TWOWBot help:**'
-#
+#system help is not a valid thing to o, whih isn
 #            cats = {}
 #            for cmd in cmds:
 #                if not hasattr(cmd, 'category'):

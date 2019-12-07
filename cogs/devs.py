@@ -7,10 +7,8 @@ import sys
 
 import discord
 from discord.ext import commands
-
+import mysql.connector
 from colorhelper import c
-
-from .util.categories import category
 
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.devs')
@@ -24,7 +22,6 @@ class Devs(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
-    @category('Developers')
     @commands.command(name='shutdown', aliases=['die'])
     async def die(self,ctx):
         '''Kills the bot.
@@ -33,7 +30,6 @@ class Devs(commands.Cog):
         await ctx.send('Shutting down...')
         await ctx.bot.logout()
 
-    @category('Developers')
     @commands.command(name='evaluate',aliases=['eval'])
     async def evaluate(self, ctx, *, code:str):
         '''Run some code.
@@ -48,6 +44,7 @@ class Devs(commands.Cog):
         logger.info('Running command eval with parameter(s) {}'.format(code))
         embed = None
         async with ctx.channel.typing():
+            db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
             result = None
             env = {
                 'channel': ctx.channel,
@@ -55,6 +52,8 @@ class Devs(commands.Cog):
                 'bot': ctx.bot,
                 'message': ctx.message,
                 'ctx': ctx,
+                'db': db,
+                'cur': db.cursor() 
             }
             env.update(globals())
             try:

@@ -10,7 +10,6 @@ import json
 import discord
 from discord.ext import commands
 from colorhelper import c
-from .util.categories import category
 
 import logging
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
@@ -34,7 +33,6 @@ class Flairs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @category('Flairs')
     @commands.command(name='f')
     @commands.guild_only()
     async def f(self,ctx, *, ipt: str):
@@ -62,7 +60,6 @@ class Flairs(commands.Cog):
         
         # await ctx.send('Oops, seems like the Flairs cog is still being worked on! Sorry for the inconvenience, but you have to ask a moderator to give the roles to you.')
 
-    @category("Flairs")
     @commands.command(name='flairs')
     @commands.guild_only()
     async def flairs(self,ctx):
@@ -90,7 +87,6 @@ class Flairs(commands.Cog):
         except discord.errors.Forbidden:
             pass
 
-    @category('Flairs')
     @commands.command(name='role',pass_context=True)
     @commands.has_role('Admin')
     async def role(self, ctx, *, role: discord.Role = None):
