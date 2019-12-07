@@ -26,7 +26,7 @@ wait...
 Nevermind, it existed. More details of this repo in the projects page.
 
 # Feature Request
-Add a new issue, use the feature request template and ping(mention) me(@kcomain) or other collaborators.
+Add a new issue, use the feature request template and ping(mention) me(@kennykcomain) or other collaborators.
 
 # Selfhosting
 You MAY selfhost this bot if you want.
