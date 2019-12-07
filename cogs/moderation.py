@@ -101,7 +101,7 @@ class Moderation(commands.Cog):
         await ctx.send('Please wait while the bot retrives data from the database...',delete_after=5)
         async with ctx.channel.typing():
             try:
-                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+                db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
@@ -143,7 +143,7 @@ class Moderation(commands.Cog):
         '''Removes all warnings from a user
         '''
         try:
-            db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+            db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
         except Exception as error:
             return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
         cur = db.cursor()
@@ -177,7 +177,7 @@ class Moderation(commands.Cog):
         uid = user.id
         async with ctx.channel.typing():
             try:
-                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+                db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
@@ -211,7 +211,7 @@ class Moderation(commands.Cog):
         await ctx.send('Connecting to database...',delete_after=3)
         async with ctx.channel.typing():
             try:
-                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+                db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
@@ -245,7 +245,7 @@ class Moderation(commands.Cog):
         await ctx.send('Connecting to database...',delete_after=3)
         async with ctx.channel.typing():
             try:
-                db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+                db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
