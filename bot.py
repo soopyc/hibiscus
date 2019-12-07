@@ -29,7 +29,7 @@ bot = commands.Bot(command_prefix=get_prefix, description='Discord Bot with Cogs
 cogs = [
     'cogs.flairs',
     'cogs.misc',
-    'cogs.devs',
+    'cogs.devs',    
     'cogs.core',
     'cogs.moderation',
     'cogs.fun'

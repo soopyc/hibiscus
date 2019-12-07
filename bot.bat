@@ -2,5 +2,5 @@
 goto yeet
 
 :yeet
-python bot.py
+python3 bot.py
 goto yeet

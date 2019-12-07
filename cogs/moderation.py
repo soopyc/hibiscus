@@ -230,7 +230,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_roles=True)
     async def mute(self,ctx,user:discord.User):
         '''Mute a user
-        Unmute on your own.
+        Unmute using the unmute command on your own.
         '''
         uid = user.id
         dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")

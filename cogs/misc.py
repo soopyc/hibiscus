@@ -41,12 +41,12 @@ class Utils(commands.Cog):
     
     @commands.command(name='changelog',aliases=['chglog','changes'])
     async def changelog(self,ctx,version:str=None):
-        '''```See the change log of the bot.
+        '''See the change log of the bot.
         version is the v*.*.*
         Version marked with [M] are minor updates.
-        use ``changelog latest`` if you want to see the latest update.
+        use `changelog latest` if you want to see the latest update.
         to see the available sections, use `changelog sections`
-        tbh you can try other sections, it might still work.```
+        tbh you can try other sections, it might still work.
         '''
         async with ctx.channel.typing():
             chglogf = open('changelog.diff','r')
