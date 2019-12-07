@@ -1,0 +1,4 @@
+colorama
+discord
+mysql
+mysql.connector
