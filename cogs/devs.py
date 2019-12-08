@@ -42,6 +42,7 @@ class Devs(commands.Cog):
         p = subprocess.Popen('git add .', stdout = subprocess.PIPE)
         p = subprocess.Popen(['git commit','-m','"Update to heroku init from discord."'])
         async with ctx.channel.typing():
+        await ctx.send('')
             p = subprocess.Popen(['git push heroku master'], stdout = subprocess.PIPE)
             out = p.stdout.decode()
         await ctx.send(f"```diff\n{out}```")
