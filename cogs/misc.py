@@ -34,9 +34,9 @@ class Utils(commands.Cog):
     async def ping(self,ctx):
         '''Ping the bot and check the latency'''
         logger.info(f'Running command ping with latency {self.bot.latency*1000}ms')
-        p = subprocess.Popen(["ping.exe","192.168.2.138",'-n','1'], stdout = subprocess.PIPE)
-        timestr = re.compile("Average = [0-9]+ms").findall(str(p.communicate()[0]))
-        embed = discord.Embed(title='Bot Ping',description=f'Heartbeat Ping: {self.bot.latency*1000}ms \nDatabase Ping:{timestr[0].split(" = ")[1]}')
+        #p = subprocess.Popen(["ping","192.168.2.138",'-n','1'], stdout = subprocess.PIPE)
+        #timestr = re.compile("Average = [0-9]+ms").findall(str(p.communicate()[0]))
+        embed = discord.Embed(title='Bot Ping',description=f'Heartbeat Ping: {self.bot.latency*1000}ms')# \nDatabase Ping:{timestr[0].split(" = ")[1]}')
         await ctx.send(embed=embed)
     
     @commands.command(name='changelog',aliases=['chglog','changes'])

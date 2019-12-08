@@ -4,7 +4,7 @@ import logging
 import shlex
 import subprocess
 import sys
-
+from datetime import datetime
 import discord
 from discord.ext import commands
 import mysql.connector
@@ -29,6 +29,22 @@ class Devs(commands.Cog):
         logger.info('Running command die')
         await ctx.send('Shutting down...')
         await ctx.bot.logout()
+
+    @commands.is_owner()
+    @commands.command(name='herokupush',aliases=['hpush'])
+    async def herokupush(self,ctx):
+        '''Push the repo to heroku
+        Bot Owner Only.
+        '''
+        herokufile = open('heroku_deploys.log','a+')
+        herokufile.write(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+        herokufile.close()
+        p = subprocess.Popen('git add .', stdout = subprocess.PIPE)
+        p = subprocess.Popen(['git commit','-m','"Update to heroku init from discord."'])
+        async with ctx.channel.typing():
+            p = subprocess.Popen(['git push heroku master'], stdout = subprocess.PIPE)
+            out = p.stdout.decode()
+        await ctx.send(f"```diff\n{out}```")
 
     @commands.command(name='evaluate',aliases=['eval'])
     async def evaluate(self, ctx, *, code:str):
@@ -77,8 +93,8 @@ class Devs(commands.Cog):
     async def gitpull(self,ctx):
         async with ctx.channel.typing():
             log=subprocess.run('git pull',stdout=subprocess.PIPE)
-            out = str(log.stdout)
-            await ctx.send("```diff\n{}```".format(out.replace('b','').replace('\\n','\n')).replace('\'',''))
+            out = log.stdout.decode()
+            await ctx.send("```diff\n{}```".format(out))
 #    @commands.command(name='gitpush')
 
 def setup(bot): 
