@@ -23,7 +23,7 @@ wait...
 
 
 
-Nevermind, it existed. More details of this repo in the projects page.
+Nevermind, it existed. More details of this repo in the projects page/docs.
 
 # Feature Request
 Add a new issue, use the feature request template and ping(mention) me(@kennykcomain) or other collaborators.
