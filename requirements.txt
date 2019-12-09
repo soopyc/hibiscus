@@ -2,3 +2,4 @@ colorama
 discord.py 
 discord.py[voice]
 mysql-connector-python
+PyNaCl
