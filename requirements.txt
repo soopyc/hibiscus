@@ -1,3 +1,4 @@
 colorama
-discord
+discord.py 
+discord.py[voice]
 mysql-connector-python
