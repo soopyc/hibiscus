@@ -34,6 +34,8 @@ You MAY selfhost this bot if you want.
 First, download python 3.6+ [here](https://www.python.org/downloads/) if you haven't. I suggest python 3.6.0 as its the language this bot is being developed in. Therefore, the chances of succeding the setup would be higher. (Also I have no \*\*\*\*\*\*\* idea how you live if you use python 2.)
 *P.S. It would also work in python 3.8.0*
 
+Update: It **MUST** work in python 3.8.
+
 ###### #####To be done.#####
 ## Flair config syntax!
 Ok this is what a typical flair/role config at v0.0.1 looks like.
