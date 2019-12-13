@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 example/
 token.txt
+icons/
+wssserv.py

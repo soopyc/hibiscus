@@ -20,13 +20,6 @@ dbpass = "jffa0eis7dtt4yvm"
 dbdb = "pycrhbfzhwacvvo9"
 dbport = "3306"
 
-'''
-!!! OUTDATED !!!
-
-db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
-!!!! Warning: No Password Connection, MUST Restrict User.
-Manual Setup is required. Therefore, the bot will not be for total publicity.
-'''
 
 class Moderation(commands.Cog):
     '''Moderation Cog'''
@@ -249,7 +242,8 @@ class Moderation(commands.Cog):
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
-
+            # Embedding a flair snippet
+            
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
