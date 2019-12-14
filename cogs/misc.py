@@ -34,11 +34,11 @@ class Utils(commands.Cog):
             await ctx.send('Please wait...',delete_after=5)
             ret = requests.get('https://status.discordapp.com/index.js')
             rec = json.loads(ret)
-            color = #000000
+           color = 0x000000
             if rec['status']['description'] == "All system Operational":
-                color = #00A600
+                color = 0x00A600
             else:
-                color = #AA00AA
+                color = 0xAA00AA
             embed = discord.Embed(title=rec['status']['description'],colour=color)
             embed.add_field('')
 
