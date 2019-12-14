@@ -42,7 +42,7 @@ class Utils(commands.Cog):
             embed = discord.Embed(title=rec['status']['description'],colour=color,description='Data grabbed from [Discord\'s status page](https://status.discordapp.com/index.json).')
             # API Status
             if rec["components"][0]["status"] == "operational":
-                embed.add_field(name="API",value="Status: Operational",inline=True)
+                embed.add_field(name="API",value="Operational",inline=True)
             else:
                 embed.add_field(name="API",value='Not Operational',inline=True)
 
