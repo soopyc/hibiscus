@@ -32,7 +32,15 @@ class Utils(commands.Cog):
         '''
         async with ctx.channel.typing():
             await ctx.send('Please wait...',delete_after=5)
-            embed = discord.Embed()
+            ret = requests.get('https://status.discordapp.com/index.js')
+            rec = json.loads(ret)
+            color = 0x000000
+            if rec['status']['description'] == "All system Operational":
+                color = 0x00A600
+            else:
+                color = 0xAA00AA
+            embed = discord.Embed(title=rec['status']['description'],colour=color)
+            embed.add_field('')
 
     @commands.command(name='testing')
     async def testing1(self,ctx):
