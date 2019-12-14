@@ -39,7 +39,7 @@ class Utils(commands.Cog):
                 color = 0x00D800
             else:
                 color = 0xAA00AA
-            embed = discord.Embed(title=rec['status']['description'],colour=color)
+            embed = discord.Embed(title=rec['status']['description'],colour=color,description='Data grabbed from [Discord\'s status page](https://status.discordapp.com/index.json).')
             # API Status
             if rec["components"][0]["status"] == "operational":
                 embed.add_field(name="API",value="Status: Operational",inline=True)
@@ -68,7 +68,6 @@ class Utils(commands.Cog):
                 embed.add_field(name="Voice Servers",value='Operational',inline=True)
             else:
                 embed.add_field(name="Gateway",value='Not Operational',inline=True)
-            embed.set_footer(text="Data grabbed from [Discord's status page](https://status.discordapp.com/index.json).")
         await ctx.send(embed=embed)
     @commands.command(name='testing')
     async def testing1(self,ctx):
