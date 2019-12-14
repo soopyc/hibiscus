@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import re
+import requests
+import json
 import datetime
 import subprocess
 import logging
@@ -22,6 +24,15 @@ class Utils(commands.Cog):
         '''
         logger.info(f'Running say command with parameter {ipt}')
         await ctx.send(f'{ipt}')
+
+    @commands.command(name='discordstatus')
+    async def discordstatus(self,ctx):
+        '''Check Discord Statuses
+        Checks discord's current status by getting data from status.discordapp.com/index.json
+        '''
+        async with ctx.channel.typing():
+            await ctx.send('Please wait...',delete_after=5)
+            embed = discord.Embed()
 
     @commands.command(name='testing')
     async def testing1(self,ctx):
