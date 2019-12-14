@@ -5,14 +5,21 @@ import shlex
 import subprocess
 import sys
 from datetime import datetime
+
 import discord
-from discord.ext import commands
 import mysql.connector
+from discord.ext import commands
+
 from colorhelper import c
 
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.devs')
 
+dbhost = "uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"
+dbuser = "rbo2k37ji007clou"
+dbpass = "jffa0eis7dtt4yvm"
+dbdb = "pycrhbfzhwacvvo9"
+dbport = "3306"
 '''Dev commands
 '''
 
@@ -61,7 +68,7 @@ class Devs(commands.Cog):
         logger.info('Running command eval with parameter(s) {}'.format(code))
         embed = None
         async with ctx.channel.typing():
-            db = mysql.connector.connect(host="localhost",user="localuser",database="cogbot_schema",port=7000)
+            db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
             result = None
             env = {
                 'channel': ctx.channel,
