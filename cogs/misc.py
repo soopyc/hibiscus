@@ -68,7 +68,7 @@ class Utils(commands.Cog):
                 embed.add_field(name="Voice Servers",value='Operational',inline=True)
             else:
                 embed.add_field(name="Gateway",value='Not Operational',inline=True)
-            embed.set_footer(text="Data grabbed from https://status.discordapp.com/index.json")
+            embed.set_footer(text="Data grabbed from [Discord's status page](https://status.discordapp.com/index.json).")
         await ctx.send(embed=embed)
     @commands.command(name='testing')
     async def testing1(self,ctx):
