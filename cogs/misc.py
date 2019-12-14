@@ -34,7 +34,7 @@ class Utils(commands.Cog):
             await ctx.send('Please wait...',delete_after=5)
             ret = requests.get('https://status.discordapp.com/index.js')
             rec = json.loads(ret)
-           color = 0x000000
+            color = 0x000000
             if rec['status']['description'] == "All system Operational":
                 color = 0x00A600
             else:
