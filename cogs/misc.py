@@ -25,23 +25,50 @@ class Utils(commands.Cog):
         logger.info(f'Running say command with parameter {ipt}')
         await ctx.send(f'{ipt}')
 
-    @commands.command(name='discordstatus')
+    @commands.command(name='discordstatus',aliases=['status','dstatus'])
     async def discordstatus(self,ctx):
         '''Check Discord Statuses
         Checks discord's current status by getting data from status.discordapp.com/index.json
         '''
         async with ctx.channel.typing():
             await ctx.send('Please wait...',delete_after=5)
-            ret = requests.get('https://status.discordapp.com/index.js')
-            rec = json.loads(ret)
+            ret = requests.get('https://status.discordapp.com/index.json')
+            rec = json.loads(ret.text)
             color = 0x000000
-            if rec['status']['description'] == "All system Operational":
-                color = 0x00A600
+            if rec['status']['description'] == "All Systems Operational":
+                color = 0x00D800
             else:
                 color = 0xAA00AA
             embed = discord.Embed(title=rec['status']['description'],colour=color)
-            embed.add_field('')
+            # API Status
+            if rec["components"][0]["status"] == "operational":
+                embed.add_field(name="API",value="Status: Operational",inline=True)
+            else:
+                embed.add_field(name="API",value='Not Operational',inline=True)
 
+            # Gateway Status
+            if rec["components"][1]["status"] == "operational":
+                embed.add_field(name="Gateway",value='Operational',inline=True)
+            else:
+                embed.add_field(name="Gateway",value='Not Operational',inline=True)
+            # CloudFlare Status
+            if rec["components"][2]["status"] == "operational":
+                embed.add_field(name="CloudFlare",value='Operational',inline=True)
+            else:
+                embed.add_field(name="CloudFlare",value='Not Operational',inline=True)
+
+            # Media Proxy Status
+            if rec["components"][3]["status"] == "operational":
+                embed.add_field(name="Media Proxy",value='Operational',inline=True)
+            else:
+                embed.add_field(name="Gateway",value='Not Operational',inline=True)
+
+            # Voice Server Status
+            if rec["components"][3]["status"] == "operational":
+                embed.add_field(name="Voice Servers",value='Operational',inline=True)
+            else:
+                embed.add_field(name="Gateway",value='Not Operational',inline=True)
+            embed.set_footer(text="Data grabbed from https://status.discordapp.com/index.json")
     @commands.command(name='testing')
     async def testing1(self,ctx):
         embed = discord.Embed(colour=discord.Colour(0x6abc42), url="https://discordapp.com", description="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", timestamp=datetime.datetime.utcfromtimestamp(1574771861))

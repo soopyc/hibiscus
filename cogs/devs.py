@@ -85,7 +85,7 @@ class Devs(commands.Cog):
                 if inspect.isawaitable(result):
                     result = await result
                 logger.info('eval success: {}'.format(result))
-                colour = 0x00FF00
+                colour = 0x00AA00
             except Exception as e:
                 result = type(e).__name__ + ': ' + str(e)
                 logger.error('{}eval error: {}'.format(c.warning,result))
