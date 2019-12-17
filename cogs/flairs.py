@@ -1,6 +1,6 @@
 '''
 Note from author:
-The flair bot would currently not support flair aliases, as it requires me to do a heck ton of stuff, binary searches
+The flair bot would currently not support flair aliases, as it requires me to do a heck ton of stuff, iteration and stuff and im already tired
 and I'm just a busy college student :P
 If you can help, feel free to submit a pr.
 
