@@ -28,8 +28,8 @@ class Moderation(commands.Cog):
 
     @commands.command(name='offences',aliases=['checkuser','warns'])
     async def warnings(self,ctx,userid:discord.User):
-        '''Check the offences of a user. 
-        Including: 
+        '''Check the offences of a user.
+        Including:
         - ban issued by the bot (global)
         - warns issued by the bot (global)
         - kicks issued by the bot (global)
@@ -152,7 +152,7 @@ class Moderation(commands.Cog):
             cur.execute(command)
             db.commit()
         await ctx.send(embed=discord.Embed(title='Removed warnings.',description=f'Removed {warns} warnings from user {uid}.',colour=0x00FF00))
-    
+
     @clearwarn.error
     async def clearwarnerror(self,error,ctx):
         if isinstance(error, commands.MissingPermissions):
@@ -228,7 +228,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(name='mute')
-    @commands.has_permissions(manage_roles=True)
+    @commands.has_permissions(manage_roles=True,manage_messages=True)
     async def mute(self,ctx,user:discord.User):
         '''Mute a user
         Unmute using the unmute command on your own.
@@ -242,8 +242,9 @@ class Moderation(commands.Cog):
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
-            # Embedding a flair snippet
+            # Flair cog command f snippet
             
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))

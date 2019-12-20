@@ -59,7 +59,7 @@ class Utils(commands.Cog):
 
             # Media Proxy Status
             if rec["components"][3]["status"] == "operational":
-                embed.add_field(name="Media Proxy",value='Operational',inline=True)
+                embed.add_field(name="Media Proxy",value='Operati   onal',inline=True)
             else:
                 embed.add_field(name="Gateway",value='Not Operational',inline=True)
 
@@ -68,12 +68,6 @@ class Utils(commands.Cog):
                 embed.add_field(name="Voice Servers",value='Operational',inline=True)
             else:
                 embed.add_field(name="Gateway",value='Not Operational',inline=True)
-        await ctx.send(embed=embed)
-    @commands.command(name='testing')
-    async def testing1(self,ctx):
-        embed = discord.Embed(colour=discord.Colour(0x6abc42), url="https://discordapp.com", description="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", timestamp=datetime.datetime.utcfromtimestamp(1574771861))
-        embed.set_image(url="https://cdn.discordapp.com/embed/avatars/0.png")
-        embed.set_footer(text="footer text", icon_url="https://cdn.discordapp.com/embed/avatars/0.png")
         await ctx.send(embed=embed)
 
     @commands.command(name='ping', aliases=['awake','check', 'pong'])

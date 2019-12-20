@@ -11,6 +11,18 @@ WORK IN PROGRESS | 2
 ! mute command
 ! unmute command
 
+v0.2.9.1 | 10
++ .gitignore
++ bot.py
++ moderation.py
++ flairs.json
++ readme.md
+++ checks.py
+-+ misc.py
+- tenplate.py
+- wssserv.py
+! flairs.py
+
 v0.2.9 | 1
 ! discordstatus command
 

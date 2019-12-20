@@ -27,7 +27,7 @@ except:
     error = 'unk'
 ##### Flairs Decode #####
 '''To See the syntax, visit the readme.md.'''
-
+# Totally didn't make the decode sequence because it's not even required.
 ##### Finish Decode #####
 class Flairs(commands.Cog):
     def __init__(self, bot):

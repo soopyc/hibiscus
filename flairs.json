@@ -1,5 +1,11 @@
 {
     "599061823798378517":{
+        "Moderation":{
+            "config":{
+              "mode": "single"
+            },
+
+        },
         "BFB":{
             "config": {
                 "mode": "single"
