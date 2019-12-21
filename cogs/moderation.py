@@ -14,10 +14,10 @@ from mysql.connector.errors import OperationalError
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.moderation')
 dblog = logging.getLogger('database')
-dbhost = "127.0.0.1"
-dbuser = "botuser_1"
-dbpass = "200515122358"
-dbdb = "dbot_db0"
+dbhost = "uc13jynhmkss3nve.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"
+dbuser = "rbo2k37ji007clou"
+dbpass = "jffa0eis7dtt4yvm"
+dbdb = "pycrhbfzhwacvvo9"
 dbport = "3306"
 
 
