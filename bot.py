@@ -47,7 +47,6 @@ if __name__ == '__main__':
         logger.info('Loading cog {}'.format(cog))
         bot.load_extension(cog)
         logger.info('Done loading cog {}'.format(cog))
-        logger.info('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 
 logger.info('Time elapsed: {} ms'.format(time.perf_counter()*1000))
 logger.info('Loaded stuffs in {} ms'.format(time.perf_counter()*1000))

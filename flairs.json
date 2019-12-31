@@ -4,7 +4,9 @@
             "config":{
               "mode": "single"
             },
-
+            "muted":{
+              "id": 617523822601699378
+            }
         },
         "BFB":{
             "config": {

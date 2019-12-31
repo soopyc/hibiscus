@@ -1,0 +1,3 @@
+@echo off
+echo Hosting %0 ...
+php -S localhost:4421 -t .
