@@ -186,8 +186,8 @@ class Moderation(commands.Cog):
                     db.commit()
                 except Exception as error:
                     return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
-            embed = discord.Embed(title=f'User{\'s\' if len(user) > 1 else ''} kicked.',description=f'User{\'s\' if len(user) > 1 else ''}:\n{[u.mention for u in user]}',colour=0xFFFF00)
-            embed.add_field(name='Reason:',value=reason)
+            embed = discord.Embed(title=f'User{"s" if len(user) > 1 else ""} kicked.',description=f'User{"s" if len(user) > 1 else ""}:\n{[u.mention for u in user]}',colour=0xFFFF00)
+            embed.add_field(name='Reason',value=reason)
             await ctx.send(embed=embed)
     @kick.error
     async def kickerror(self,error,ctx):
