@@ -161,7 +161,7 @@ class Moderation(commands.Cog):
 
     @commands.command(name='kick')
     @commands.has_permissions(kick_members=True)
-    async def kick(self,ctx,user:discord.User,reason:str):
+    async def kick(self,ctx,user: commands.Greedy[discord.User],reason:str):
         '''Kick a user from the server
         WHO DOES THAT??????
         '''
@@ -174,20 +174,21 @@ class Moderation(commands.Cog):
             except Exception as error:
                 return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
             cur = db.cursor()
-            try:
-                await ctx.guild.kick(user=user,reason=reason)
-            except Exception as error:
-                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
-            try:
-                cur.execute(f'select * from offences where id="{uid}"')
-                count = len(cur.fetchall())+1
-                cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{reason}",{count},"{dnt}","User Kicked.",\"kick\","{ctx.guild.id}")')
-                db.commit()
-            except Exception as error:
-                return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
-            embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked',colour=0xFFFF00)
-            embed.add_field(name='Reason:',value=reason)
-        await ctx.send('_ _',embed=embed)
+            for i in user:
+                try:
+                    await ctx.guild.kick(user=user,reason=reason)
+                except Exception as error:
+                    return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+                try:
+                    cur.execute(f'select * from offences where id="{uid}"')
+                    count = len(cur.fetchall())+1
+                    cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{reason}",{count},"{dnt}","User Kicked.",\"kick\","{ctx.guild.id}")')
+                    db.commit()
+                except Exception as error:
+                    return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
+                embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked',colour=0xFFFF00)
+                embed.add_field(name='Reason:',value=reason)
+            await ctx.send(embed=embed)
     @kick.error
     async def kickerror(self,error,ctx):
         embed = discord.Embed(title='Kicking failed',description='Exception:\n```{}```'.format(error),colour=0xFF0000)
