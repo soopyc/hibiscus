@@ -167,7 +167,6 @@ class Moderation(commands.Cog):
         '''
         await ctx.send('Connecting to database...',delete_after=3)
         dnt = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        uid = user.id
         async with ctx.channel.typing():
             try:
                 db = mysql.connector.connect(host=dbhost,user=dbuser,password=dbpass,database=dbdb,port=dbport)
@@ -180,9 +179,9 @@ class Moderation(commands.Cog):
                 except Exception as error:
                     return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
                 try:
-                    cur.execute(f'select * from offences where id="{uid}"')
+                    cur.execute(f'select * from offences where id="{i.id}"')
                     count = len(cur.fetchall())+1
-                    cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{uid}","{reason}",{count},"{dnt}","User Kicked.",\"kick\","{ctx.guild.id}")')
+                    cur.execute(f'insert into offences (id,details,count,date,brief,punishment,server) values ("{i.id}","{reason}",{count},"{dnt}","User Kicked.",\"kick\","{ctx.guild.id}")')
                     db.commit()
                 except Exception as error:
                     return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
@@ -190,7 +189,7 @@ class Moderation(commands.Cog):
             embed.add_field(name='Reason',value=reason)
             await ctx.send(embed=embed)
     @kick.error
-    async def kickerror(self,error,ctx):
+    async def kickerror(self,ctx,error):
         embed = discord.Embed(title='Kicking failed',description='Exception:\n```{}```'.format(error),colour=0xFF0000)
         await ctx.send(embed=embed)
     @commands.command(name='ban',aliases=['umbrella','banhammer'])
