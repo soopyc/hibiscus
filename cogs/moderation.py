@@ -161,7 +161,7 @@ class Moderation(commands.Cog):
 
     @commands.command(name='kick')
     @commands.has_permissions(kick_members=True)
-    async def kick(self,ctx,user: commands.Greedy[discord.User],reason:str):
+    async def kick(self,ctx,user: commands.Greedy[discord.User],reason:str='Not Specified.'):
         '''Kick a user from the server
         WHO DOES THAT??????
         '''
@@ -176,7 +176,7 @@ class Moderation(commands.Cog):
             cur = db.cursor()
             for i in user:
                 try:
-                    await ctx.guild.kick(user=user,reason=reason)
+                    await ctx.guild.kick(user=i,reason=reason)
                 except Exception as error:
                     return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
                 try:
@@ -186,8 +186,8 @@ class Moderation(commands.Cog):
                     db.commit()
                 except Exception as error:
                     return await ctx.send(embed=discord.Embed(title='Command errored.',description=f'Exception: \n```{error}```',colour=0xFF0000))
-                embed = discord.Embed(title='User kicked.',description=f'User {user.mention} kicked',colour=0xFFFF00)
-                embed.add_field(name='Reason:',value=reason)
+            embed = discord.Embed(title=f'User{\'s\' if len(user) > 1 else ''} kicked.',description=f'User{\'s\' if len(user) > 1 else ''}:\n{[u.mention for u in user]}',colour=0xFFFF00)
+            embed.add_field(name='Reason:',value=reason)
             await ctx.send(embed=embed)
     @kick.error
     async def kickerror(self,error,ctx):
