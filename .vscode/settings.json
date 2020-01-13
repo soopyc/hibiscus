@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "C:\\Program Files\\Python36\\python.exe"
+   "python.pythonPath": "/home/gitpod/.pyenv/versions/3.7.6/bin/python",
+   "python.linting.pylintEnabled": true,
+   "python.linting.enabled": true
 }
