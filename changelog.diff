@@ -1,4 +1,5 @@
-NEWS | 2
+NEWS | 3
+! pyinstaller build will not be available until the rewrite is complete.
 ! pyinstaller builds will be available eventually. Just, stay patient.
 ! changelog might be uglified to suit the changelog command.
 
@@ -7,7 +8,8 @@ LEGENDS | 3
 - indicates changes that removes content
 ! indicates work-in-progress changes
 
-WORK IN PROGRESS | 2
+WORK IN PROGRESS | 3
+! help command
 ! mute command
 ! unmute command
 
