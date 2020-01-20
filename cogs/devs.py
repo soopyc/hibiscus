@@ -47,13 +47,14 @@ class Devs(commands.Cog):
         herokufile.write(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
         herokufile.close()
         p = subprocess.Popen('git add .', stdout = subprocess.PIPE)
-        p = subprocess.Popen(['git commit','-m','"Update to heroku init from discord."'])
+        p = subprocess.Popen(['git commit','-m',f'"Update to heroku init by user {ctx.author.name}."'])
         async with ctx.channel.typing():
             await ctx.send('')
             p = subprocess.Popen(['git push heroku master'], stdout = subprocess.PIPE)
             out = p.stdout.decode()
         await ctx.send(f"```diff\n{out}```")
-
+        
+        
     @commands.command(name='evaluate',aliases=['eval'])
     async def evaluate(self, ctx, *, code:str):
         '''Run some code.
