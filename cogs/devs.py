@@ -11,7 +11,7 @@ import mysql.connector
 from discord.ext import commands
 
 from colorhelper import c
-
+from .util.checks import checks
 logging.basicConfig(level=logging.INFO, format='[%(name)s %(levelname)s] %(message)s')
 logger = logging.getLogger('cog.devs')
 
@@ -29,6 +29,7 @@ class Devs(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
+    @checks.is_dev()
     @commands.command(name='shutdown', aliases=['die'])
     async def die(self,ctx):
         '''Kills the bot.
@@ -54,7 +55,7 @@ class Devs(commands.Cog):
             out = p.stdout.decode()
         await ctx.send(f"```diff\n{out}```")
         
-        
+    @checks.is_dev()
     @commands.command(name='evaluate',aliases=['eval'])
     async def evaluate(self, ctx, *, code:str):
         '''Run some code.
@@ -98,6 +99,8 @@ class Devs(commands.Cog):
             await ctx.channel.send(embed=embed)
         except discord.errors.Forbidden:
             pass
+
+    @checks.is_dev()
     @commands.command(name='gitpull')
     async def gitpull(self,ctx):
         async with ctx.channel.typing():
