@@ -1,7 +1,5 @@
-NEWS | 3
-! pyinstaller build will not be available until the rewrite is complete.
-! pyinstaller builds will be available eventually. Just, stay patient.
-! changelog might be uglified to suit the changelog command.
+NEWS | 1
+! starting a rewrite of the bot [2021-05-26]
 
 LEGENDS | 3
 + indicates changes that adds content

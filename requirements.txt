@@ -4,7 +4,3 @@ discord.py[voice]
 mysql-connector-python
 PyNaCl
 requests
-
-
-
-
