@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import re
-import requests
+import aiohttp
 import json
 import datetime
 import subprocess
@@ -37,8 +37,10 @@ class Utils(commands.Cog):
         """
         async with ctx.channel.typing():
             await ctx.send('Please wait...', delete_after=5)
-            ret = requests.get('https://status.discordapp.com/index.json')
-            rec = json.loads(ret.text)
+            async with aiohttp.ClientSession() as session:
+                async with session.get('https://status.discordapp.com/index.json') as ret:
+                    rec = json.loads(await ret.text())
+
             if rec['status']['description'] == "All Systems Operational":
                 color = 0x00D800
             else:
